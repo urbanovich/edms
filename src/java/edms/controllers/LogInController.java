@@ -31,5 +31,16 @@ public class LogInController extends HttpServlet {
             throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/layouts/login/index.jsp").forward(request, response);
     }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        String login = request.getParameter("login");
+        String password = request.getParameter("password");
+        
+        
+        
+    }
 
 }

@@ -19,10 +19,10 @@
             <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
-                    <form>
+                    <form action="${pageContext.request.contextPath}/login" method="post">
                         <div class="form-group">
                             <label for="login">Логин:</label>
-                            <input type="email" class="form-control" name="login" id="login" placeholder="Логин">
+                            <input type="login" class="form-control" name="login" id="login" placeholder="Логин">
                         </div>
                         <div class="form-group">
                             <label for="password">Пароль:</label>
