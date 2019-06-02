@@ -12,6 +12,10 @@
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>edms.controllers.DashboardController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DocumentController</servlet-name>
+        <servlet-class>edms.controllers.DocumentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IndexController</servlet-name>
         <url-pattern>/</url-pattern>
@@ -28,6 +32,10 @@
     <servlet-mapping>
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DocumentController</servlet-name>
+        <url-pattern>/document</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

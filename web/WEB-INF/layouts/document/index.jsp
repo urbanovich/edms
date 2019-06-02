@@ -14,7 +14,7 @@
         <script src="${pageContext.request.contextPath}/pub/js/jquery/jquery-1.12.4.min.js"></script>
         <script src="${pageContext.request.contextPath}/pub/js/bootstrap-3.3.7/bootstrap.min.js"></script>
     </head>
-    <body>
+    <body>        
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -28,7 +28,17 @@
                 <div class="col-md-10">
                     <div class="container">
                         <div class="row">
-                            
+                            <div class="col-md-12">
+                                <div class="container">
+                                    <div class="row">
+                                        <%@ include file="buttons.jsp" %>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-12">
+                                <%@ include file="content.jsp" %>
+                            </div>
                         </div>
                     </div>
                 </div>
