@@ -10,6 +10,8 @@ import edms.database.Db;
 import java.security.MessageDigest;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +33,10 @@ public class User implements Entity {
     
     public int roleId = 0;
 
+    public String getName() {
+        return this.firstname + " " + this.lastname;
+    }
+    
     public User(int userId) {
         
         ResultSet user = User.getUser(userId);
@@ -66,6 +72,14 @@ public class User implements Entity {
         }
         
         return false;
+    }
+    
+    public List<Document> getDocuments() {
+        List<Document> documents = new ArrayList<>();
+        
+        documents = Document.getDocumentsByUserId(this.id);
+        
+        return documents;
     }
     
     public static User getUser(String login, String password) {

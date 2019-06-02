@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="edms.entity.Document"%>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -15,12 +18,14 @@
         </tr>
     </thead>
     <tbody>
-        <!--<tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-        </tr>-->
-
+        <% List<Document> documents = (ArrayList<Document>) request.getAttribute("documents");
+            for (Document document : documents) {%>
+                <tr>
+                    <th scope="row"><% out.print(document.getId()); %></th>
+                    <td><% out.print(document.getTitle()); %></td>
+                    <td><% out.print(document.getDateAdd()); %></td>
+                    <td><% out.print(document.getUser().getName()); %></td>
+                </tr>
+        <% }%>
     </tbody>
 </table>

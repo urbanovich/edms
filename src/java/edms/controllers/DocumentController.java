@@ -52,6 +52,8 @@ public class DocumentController extends HttpServlet {
                 break;
             case "default":
             default:
+                System.out.println(user.getName());
+                request.setAttribute("documents", user.getDocuments());
                 request.getRequestDispatcher("/WEB-INF/layouts/document/index.jsp").forward(request, response);
                 break;
         }
@@ -77,7 +79,7 @@ public class DocumentController extends HttpServlet {
                 String content = request.getParameter("content");
                 String userId = request.getParameter("user_id");
         
-                Document doc = new Document(title, content, user.id);
+                Document doc = new Document(0, title, content, user.id, "", "");
                 
                 if (doc.create()) {
                     request.setAttribute("addSuccess", "Документ создан");
