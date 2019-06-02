@@ -24,11 +24,9 @@ public class User implements Entity {
     public static boolean isExists(String name, String password) {
 
         Db db = new Db();
-
         password = User.md5(password);
-        System.out.println(password);
         ResultSet result = db.query(
-                "select * from `user` where `login` = \"" + name + "\" and `password` = \"" + password + "\""
+            "select * from `user` where `login` = \"" + name + "\" and `password` = \"" + password + "\""
         );
         
         try {

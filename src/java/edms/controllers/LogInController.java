@@ -28,7 +28,7 @@ public class LogInController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {        
         request.getRequestDispatcher("/WEB-INF/layouts/login/index.jsp").forward(request, response);
     }
 
@@ -40,7 +40,8 @@ public class LogInController extends HttpServlet {
         String password = request.getParameter("password");
 
         if(!User.isExists(login, password)) {
-            request.getRequestDispatcher("/WEB-INF/layouts/login/index_1.jsp").forward(request, response);
+            request.setAttribute("accessDenied", "Access denied!!!");
+            this.doGet(request, response);
         }
 
     }

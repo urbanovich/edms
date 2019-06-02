@@ -17,6 +17,16 @@
     <body>
         <div class="container">
             <div class="row">
+                <div class="col-lg-12">
+                    <% String accessDenied = (String)request.getAttribute("accessDenied");
+                        if (accessDenied != null) { %>
+                            <div class="alert alert-danger" role="alert">
+                                ${accessDenied}
+                            </div>
+                        <% } %>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
                     <form action="${pageContext.request.contextPath}/login" method="post">
