@@ -5,8 +5,8 @@
  */
 package edms.controllers;
 
+import edms.user.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,16 +31,18 @@ public class LogInController extends HttpServlet {
             throws ServletException, IOException {
         request.getRequestDispatcher("/WEB-INF/layouts/login/index.jsp").forward(request, response);
     }
-    
+
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        
-        
-        
+
+        if(!User.isExists(login, password)) {
+            request.getRequestDispatcher("/WEB-INF/layouts/login/index_1.jsp").forward(request, response);
+        }
+
     }
 
 }

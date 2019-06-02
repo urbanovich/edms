@@ -5,6 +5,8 @@
  */
 package edms.database;
 
+import java.sql.ResultSet;
+
 /**
  *
  * @author dzmitry
@@ -14,6 +16,6 @@ public interface Query {
     public boolean create();
     public boolean update();
     public boolean delete();
-    public boolean query();
+    public ResultSet query(String query);
     
 }
