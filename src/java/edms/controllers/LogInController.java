@@ -40,10 +40,14 @@ public class LogInController extends HttpServlet {
         String password = request.getParameter("password");
 
         if(!User.isExists(login, password)) {
-            request.setAttribute("accessDenied", "Access denied!!!");
+            request.setAttribute("accessDenied", "Доступ запрещен(проверьте логин и пароль)!!!");
             this.doGet(request, response);
         }
 
+        User user = User.getUser(login, password);
+        request.getSession().setAttribute("user", user);
+        
+        response.sendRedirect(request.getContextPath() + "/dashboard");
     }
 
 }
