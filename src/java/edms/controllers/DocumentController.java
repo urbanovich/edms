@@ -5,8 +5,12 @@
  */
 package edms.controllers;
 
+import edms.entity.Document;
+import edms.helper.ControllerHelper;
+import edms.entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,11 +33,66 @@ public class DocumentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-//        if (request.getSession().getAttribute("user") == null) {
-//            response.sendRedirect(request.getContextPath() + "/login");
+
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+
+//        if (!ControllerHelper.userIsLogged(request, response)) {
+//            return;
 //        }
         
-        request.getRequestDispatcher("/WEB-INF/layouts/document/index.jsp").forward(request, response);
+        String action = request.getParameter("action");
+
+        switch (action == null ? "default" : action) {
+            case "new":
+                request.getRequestDispatcher("/WEB-INF/layouts/document/new_document.jsp").forward(request, response);
+                break;
+            case "default":
+            default:
+                request.getRequestDispatcher("/WEB-INF/layouts/document/index.jsp").forward(request, response);
+                break;
+        }
+
+        
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        
+        String action = request.getParameter("action");
+
+        switch (action == null ? "default" : action) {
+            case "new":
+                String title = request.getParameter("title");
+                String content = request.getParameter("content");
+                String userId = request.getParameter("user_id");
+        
+                Document doc = new Document(title, content, user.id);
+                
+                if (doc.create()) {
+                    request.setAttribute("addSuccess", "Документ создан");
+                } else {
+                    request.setAttribute("addError", "Документ не создан");
+                }
+                
+                this.doGet(request, response);
+                break;
+            case "default":
+            default:
+                response.sendRedirect(request.getContextPath() + "/document");
+                break;
+        }
+        
+        
     }
 }

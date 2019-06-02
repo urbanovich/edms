@@ -26,6 +26,7 @@ public class Database {
         try {
             this.createUserTable(db);
             this.createUserRoleTable(db);
+            this.createDocumentTables(db);
 
         } catch (SQLException ex) {
             Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,6 +51,28 @@ public class Database {
                 "create table if not exists user_role( "
                     + "id int(10) primary key auto_increment, "
                     + "title varchar(100) "
+                + ") engine=myisam character set=utf8;"
+        );
+    }
+    
+    protected void createDocumentTables(Db db) throws SQLException {
+        db.statement.execute(
+                "create table if not exists document( "
+                    + "id int(10) primary key auto_increment, "
+                    + "title varchar(100), "
+                    + "content text, "
+                    + "date_add timestamp default current_timestamp, "
+                    + "date_upd timestamp default current_timestamp, "
+                    + "user_id int(10) comment 'who added the document', "
+                    + "index document (`id`, `title`) "
+                + ") engine=myisam character set=utf8;"
+        );
+        db.statement.execute(
+                "create table if not exists document_to_user( "
+                    + "id int(10) primary key auto_increment, "
+                    + "document_id int(10), "
+                    + "user_id int(10), "
+                    + "index document (`id`, `document_id`, `user_id`) "
                 + ") engine=myisam character set=utf8;"
         );
     }

@@ -91,4 +91,16 @@ public class Db implements Query {
         return result;
     }
     
+    public boolean execute(String query) {
+        boolean result = false;
+        
+        try {
+            result = this.statement.execute(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return result;
+    }
+    
 }

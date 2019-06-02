@@ -6,7 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="col-md-4">
-    <a class="btn btn-primary">Зарегистрировать новый документ</a>
+    <a class="btn btn-primary" 
+       href="${pageContext.request.contextPath}/document?action=new">Зарегистрировать новый документ</a>
 </div>
 <div class="col-md-3">
     <a class="btn btn-primary">Удалить выбранные</a>

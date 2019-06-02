@@ -5,7 +5,7 @@
  */
 package edms.controllers;
 
-import edms.user.User;
+import edms.entity.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
