@@ -96,7 +96,7 @@ public class Document implements Entity {
         List<Document> documents = new ArrayList<>();
         Db db = new Db();
         ResultSet result = db.query(
-                "select * from " + Document.table + " where id = " + id
+                "select * from " + Document.table + " where user_id = " + id
         );
         
         try {
