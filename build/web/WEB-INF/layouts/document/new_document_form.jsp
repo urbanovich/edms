@@ -3,7 +3,7 @@
     Created on : Jun 2, 2019, 3:33:52 PM
     Author     : dzmitry
 --%>
-
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <form action="${pageContext.request.contextPath}/document?action=new" method="post">
     <div class="form-group">
@@ -16,9 +16,7 @@
     </div>
     <div class="form-group">
         <label for="user_id">Отправить пользователю</label>
-        <select id="user_id" name="user_id" class="form-control">
-            <option value="0">Выберите пользователя</option>
-        </select>
+        <t:user_list user_id="${user.id}" users="${users}"></t:user_list>
         <span class="help-block">
             Выберите пользователя кому отправить этот документ на рассмотрение.
         </span>

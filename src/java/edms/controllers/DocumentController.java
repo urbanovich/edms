@@ -48,7 +48,18 @@ public class DocumentController extends HttpServlet {
 
         switch (action == null ? "default" : action) {
             case "new":
+                
+                request.setAttribute("users", User.getAllUsers());
                 request.getRequestDispatcher("/WEB-INF/layouts/document/new_document.jsp").forward(request, response);
+                break;
+            case "edit":
+                
+                String document_id = request.getParameter("document_id");
+                Document document = new Document(Integer.parseInt(document_id));
+                request.setAttribute("users", User.getAllUsers());
+                request.setAttribute("document", document);
+                request.setAttribute("user", document.getUser());
+                request.getRequestDispatcher("/WEB-INF/layouts/document/edit_document.jsp").forward(request, response);
                 break;
             case "default":
             default:
@@ -79,7 +90,7 @@ public class DocumentController extends HttpServlet {
                 String content = request.getParameter("content");
                 String userId = request.getParameter("user_id");
         
-                Document doc = new Document(0, title, content, user.id, "", "");
+                Document doc = new Document(0, title, content, Integer.parseInt(userId), "", "");
                 
                 if (doc.create()) {
                     request.setAttribute("addSuccess", "Документ создан");

@@ -55,6 +55,18 @@ public class User implements Entity {
         }
     }
     
+    public int getId() {
+        return this.id;
+    }
+    
+    public String getFirstname() {
+        return this.firstname;
+    }
+    
+    public String getLastname() {
+        return this.lastname;
+    }
+    
     public static boolean isExists(String name, String password) {
 
         Db db = new Db();
@@ -112,6 +124,37 @@ public class User implements Entity {
         );
         
         return result;
+    }
+    
+    public static ResultSet getUsers() {
+        
+        Db db = new Db();
+        ResultSet result = db.query(
+            "select * from `" + User.table + "` where 1"
+        );
+        
+        return result;
+    }
+    
+    public static ArrayList<User> getAllUsers() {
+        ArrayList<User> users = new ArrayList<User>();
+        Db db = new Db();
+        ResultSet result = db.query(
+            "select * from " + User.table + " where 1"
+        );
+        
+        try {
+            
+            while(result.next()) {
+                users.add(
+                    new User(Integer.parseInt(result.getString("id")))
+                );
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return users;
     }
 
     public static String md5(String md5) {

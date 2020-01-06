@@ -36,6 +36,24 @@ public class Document implements Entity {
     
     protected String dateUpd;
     
+    public Document(int id) {
+        
+        ResultSet document = Document.getById(id);
+        
+        try {
+            while(document.next()) {
+                this.id = document.getInt("id");
+                this.userId = document.getInt("user_id");
+                this.title = document.getString("title");
+                this.content = document.getString("content");
+                this.user = new User(document.getInt("user_id"));
+                break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LogInController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public Document(
             int id, 
             String title, 
@@ -90,6 +108,16 @@ public class Document implements Entity {
     
     public User getUser() {
         return this.user;
+    }
+    
+    public static ResultSet getById(int id) {
+        
+        Db db = new Db();
+        ResultSet result = db.query(
+            "select * from `" + Document.table + "` where `id` = \"" + id + "\""
+        );
+        
+        return result;
     }
     
     public static List<Document> getDocumentsByUserId(int id) {
