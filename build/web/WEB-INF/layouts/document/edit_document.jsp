@@ -13,7 +13,6 @@
                 </div>
                 <div class="col-md-10">
                     <%@ include file="edit_document_form.jsp" %>
-                    <%--<t:edit_document></t:edit_document>--%>
                 </div>
             </div>
     </jsp:attribute>

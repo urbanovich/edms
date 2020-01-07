@@ -6,7 +6,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="edms.entity.Document"%>
-<form action="${pageContext.request.contextPath}/document?action=save&document_id=${document.getId()}" method="post">
+<form action="${pageContext.request.contextPath}/document?action=update&document_id=${document.getId()}" method="post">
     <div class="form-group">
         <label for="title">Название документа</label>
         <input type="text" class="form-control" id="title" name="title" value="${document.getTitle()}">

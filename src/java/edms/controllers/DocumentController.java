@@ -82,15 +82,18 @@ public class DocumentController extends HttpServlet {
             return;
         }
         
+        String title, content, userId, documentId;
+        Document doc;
+        
         String action = request.getParameter("action");
 
         switch (action == null ? "default" : action) {
             case "new":
-                String title = request.getParameter("title");
-                String content = request.getParameter("content");
-                String userId = request.getParameter("user_id");
+                title = request.getParameter("title");
+                content = request.getParameter("content");
+                userId = request.getParameter("user_id");
         
-                Document doc = new Document(0, title, content, Integer.parseInt(userId), "", "");
+                doc = new Document(0, title, content, Integer.parseInt(userId), "", "");
                 
                 if (doc.create()) {
                     request.setAttribute("addSuccess", "Документ создан");
@@ -98,7 +101,25 @@ public class DocumentController extends HttpServlet {
                     request.setAttribute("addError", "Документ не создан");
                 }
                 
-                this.doGet(request, response);
+                response.sendRedirect(request.getContextPath() + "/document");
+                break;
+            case "update":
+                documentId = request.getParameter("document_id");
+                title = request.getParameter("title");
+                content = request.getParameter("content");
+                userId = request.getParameter("user_id");
+        
+                doc = new Document(Integer.parseInt(documentId));
+                doc.setTitle(title);
+                doc.setContent(content);
+                doc.setUserId(userId);
+                
+                if (doc.update()) {
+                    request.setAttribute("addSuccess", "Документ создан");
+                } else {
+                    request.setAttribute("addError", "Документ не создан");
+                }
+                response.sendRedirect(request.getContextPath() + "/document");
                 break;
             case "default":
             default:

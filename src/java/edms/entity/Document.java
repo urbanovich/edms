@@ -110,6 +110,18 @@ public class Document implements Entity {
         return this.user;
     }
     
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
+    public void setUserId(String userId) {
+        this.userId = Integer.parseInt(userId);
+    }
+    
     public static ResultSet getById(int id) {
         
         Db db = new Db();
@@ -165,7 +177,18 @@ public class Document implements Entity {
 
     @Override
     public boolean update() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result = false;
+        Db db = new Db();
+        result = db.execute(
+            "update " + Document.table
+                    + " set "
+                    + "title=\"" + this.title + "\", "
+                    + "content=\"" + this.content + "\", "
+                    + "user_id=\"" + this.userId + "\""
+                    + " where id=" + this.id
+        );
+        
+        return result;
     }
 
     @Override
