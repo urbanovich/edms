@@ -1,6 +1,7 @@
 <%@tag description="Overall Page template" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@attribute name="content" fragment="true" %>
+<%@attribute name="message" fragment="true" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,16 +14,7 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <% String accessDenied = (String)request.getAttribute("accessDenied");
-                        if (accessDenied != null) { %>
-                            <div class="alert alert-danger" role="alert">
-                                ${accessDenied}
-                            </div>
-                        <% } %>
-                </div>
-            </div>
+            <jsp:invoke fragment="message"/>
             <jsp:invoke fragment="content"/>
         </div>
     </body>

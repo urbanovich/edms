@@ -39,10 +39,6 @@ public class DocumentController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-
-//        if (!ControllerHelper.userIsLogged(request, response)) {
-//            return;
-//        }
         
         String action = request.getParameter("action");
 
@@ -96,9 +92,9 @@ public class DocumentController extends HttpServlet {
                 doc = new Document(0, title, content, Integer.parseInt(userId), "", "");
                 
                 if (doc.create()) {
-                    request.setAttribute("addSuccess", "Документ создан");
+                    request.setAttribute("message", "Документ создан");
                 } else {
-                    request.setAttribute("addError", "Документ не создан");
+                    request.setAttribute("message", "Документ не создан");
                 }
                 
                 response.sendRedirect(request.getContextPath() + "/document");
@@ -115,9 +111,9 @@ public class DocumentController extends HttpServlet {
                 doc.setUserId(userId);
                 
                 if (doc.update()) {
-                    request.setAttribute("addSuccess", "Документ создан");
+                    request.setAttribute("message", "Документ создан");
                 } else {
-                    request.setAttribute("addError", "Документ не создан");
+                    request.setAttribute("message", "Документ не создан");
                 }
                 response.sendRedirect(request.getContextPath() + "/document");
                 break;
