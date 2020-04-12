@@ -30,6 +30,8 @@ public class Document implements Entity {
     
     protected String title;
     
+    protected String test_field;
+    
     protected String content;
     
     protected String dateAdd;
@@ -64,6 +66,24 @@ public class Document implements Entity {
     ) {
         this.id = id;
         this.title = title;
+        this.content = content;
+        this.userId = userId;
+        this.dateAdd = dateAdd;
+        this.dateUpd = dateUpd;
+    }
+    
+    public Document(
+            int id, 
+            String title, 
+            String test_field, 
+            String content, 
+            int userId, 
+            String dateAdd, 
+            String dateUpd
+    ) {
+        this.id = id;
+        this.title = title;
+        this.test_field = title;
         this.content = content;
         this.userId = userId;
         this.dateAdd = dateAdd;
@@ -164,9 +184,10 @@ public class Document implements Entity {
         boolean result = false;
         Db db = new Db();
         result = db.execute(
-            "insert into " + Document.table + " (title, content, user_id) "
+            "insert into " + Document.table + " (title, test_field, content, user_id) "
                     + "values("
                     + "\"" + this.title + "\","
+                    + "\"" + this.test_field + "\","
                     + "\"" + this.content + "\","
                     + "\"" + this.userId + "\""
                     + ")"

@@ -78,7 +78,7 @@ public class DocumentController extends HttpServlet {
             return;
         }
         
-        String title, content, userId, documentId;
+        String title, test_field, content, userId, documentId;
         Document doc;
         
         String action = request.getParameter("action");
@@ -86,10 +86,11 @@ public class DocumentController extends HttpServlet {
         switch (action == null ? "default" : action) {
             case "new":
                 title = request.getParameter("title");
+                test_field = request.getParameter("test_field");
                 content = request.getParameter("content");
                 userId = request.getParameter("user_id");
         
-                doc = new Document(0, title, content, Integer.parseInt(userId), "", "");
+                doc = new Document(0, title, test_field, content, Integer.parseInt(userId), "", "");
                 
                 if (doc.create()) {
                     request.setAttribute("message", "Документ создан");

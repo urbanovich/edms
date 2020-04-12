@@ -11,6 +11,10 @@
         <input type="text" class="form-control" id="title" name="title">
     </div>
     <div class="form-group">
+        <label for="title">Test field</label>
+        <input type="text" class="form-control" id="title" name="test_field">
+    </div>
+    <div class="form-group">
         <label for="content">Содержание документа</label>
         <textarea cols="10" rows="10" id="content" class="form-control" name="content"></textarea>
     </div>
